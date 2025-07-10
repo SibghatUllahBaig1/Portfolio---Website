@@ -41,10 +41,12 @@
 			}
 
 			.work-item .image.fit.thumb {
-				height: 220px !important;
+				height: 120px !important;
+				width: 180px !important;
 				overflow: hidden !important;
 				border-radius: 8px !important;
 				flex-shrink: 0 !important;
+				margin: 0 auto !important;
 			}
 
 			.work-item .image.fit.thumb img {
@@ -55,7 +57,7 @@
 			}
 
 			.work-item h3 {
-				margin-top: 0em !important;
+				margin-top: 1em !important;
 				margin-bottom: 0.5em !important;
 				flex-shrink: 0 !important;
 			}
@@ -65,33 +67,14 @@
 				margin: 0 !important;
 				font-size: 0.9em !important;
 				line-height: 1.4 !important;
-				overflow: hidden !important;
-				display: -webkit-box !important;
-				-webkit-line-clamp: 2 !important;
-				-webkit-box-orient: vertical !important;
+				/* Expand descriptions by default - no line clamp */
+				display: block !important;
 				transition: all 0.3s ease !important;
 			}
 
-			.work-item p.expanded {
-				-webkit-line-clamp: unset !important;
-				display: block !important;
-			}
-
 			.read-more-btn {
-				background: none !important;
-				border: none !important;
-				color: #49bf9d !important;
-				cursor: pointer !important;
-				font-size: 0.8em !important;
-				font-weight: bold !important;
-				margin-top: 0.5em !important;
-				padding: 0 !important;
-				text-decoration: underline !important;
-				transition: color 0.3s ease !important;
-			}
-
-			.read-more-btn:hover {
-				color: #369870 !important;
+				/* Hide read more buttons since descriptions are expanded by default */
+				display: none !important;
 			}
 
 			.work-item.expanded {
@@ -138,6 +121,67 @@
 				color: #666 !important;
 				max-width: 800px !important;
 				margin: 0 auto !important;
+			}
+
+			/* Print-specific styles for PDF export */
+			@media print {
+				body {
+					font-size: 12px !important;
+					line-height: 1.4 !important;
+				}
+
+				#header {
+					page-break-after: avoid !important;
+				}
+
+				.project-category {
+					page-break-before: avoid !important;
+					margin-top: 1.5em !important;
+				}
+
+				.work-item {
+					page-break-inside: avoid !important;
+					height: auto !important;
+					margin-bottom: 1em !important;
+				}
+
+				.work-item p {
+					-webkit-line-clamp: unset !important;
+					display: block !important;
+				}
+
+				.read-more-btn {
+					display: none !important;
+				}
+
+				/* Hide or minimize images in PDF to reduce file size */
+				.work-item .image.fit.thumb {
+					display: none !important;
+				}
+
+				/* Adjust work item layout without images */
+				.work-item {
+					height: auto !important;
+					min-height: auto !important;
+				}
+
+				.experience-item {
+					page-break-inside: avoid !important;
+				}
+
+				.closing-section {
+					page-break-before: avoid !important;
+				}
+
+				/* Ensure all text is visible in PDF */
+				* {
+					color: #000 !important;
+					background: transparent !important;
+				}
+
+				h1, h2, h3 {
+					color: #333 !important;
+				}
 			}
 
 			/* Project category headers */
@@ -339,29 +383,19 @@
 							<article class="col-6 col-12-xsmall work-item">
 								<a href="images/1.png" class="image fit thumb"><img src="images/1.png" alt="Flutter E-Commerce App" /></a>
 								<h3>Unimetals – Metal Scraping App for Businesses</h3>
-								<p class="project-description">Unimetals is a UK-based mobile and web application built for businesses and individuals involved in scrap metal disposal. Designed with Android Studio, the platform operates across multiple cities, allowing users to check availability and book collection slots effortlessly. It simplifies mobile app development needs by streamlining scheduling and making metal pickup efficient and hassle-free.
-
-The app includes an intuitive admin panel that enables the Unimetals team to manage collection sites, bookings, and customer data. It supports mobile app customization, bug fixes, and is designed with scalability in mind—ensuring smooth operations as it expands into new cities.
-
-Additionally, Unimetals provides mobile app consultation services and features for website to mobile app transformation. While focused on metal collection, the backend architecture aligns with industry best practices in e-commerce, travel & transportation, food delivery, weather & forecasting, and productivity & task management domains.</p>
+								<p class="project-description">UK-based mobile and web app for scrap metal disposal businesses. Built with Android Studio, features booking system, admin panel, multi-city operations, and scalable architecture.</p>
 								<button class="read-more-btn" onclick="toggleReadMore(this)">Read More</button>
 							</article>
 							<article class="col-6 col-12-xsmall work-item">
 								<a href="images/5.png" class="image fit thumb"><img src="images/5.png" alt="Video Calling App" /></a>
 								<h3>Checkin Hoops</h3>
-								<p class="project-description">This app is the first of its kind, exclusively designed for basketball players. It enables users to locate nearby courts, check in while on-site, and engage with fellow players through the app. Additionally, it features a dedicated newsfeed specifically for the basketball community. Developed using Flutter, the app boasts a large and active user base.</p>
+								<p class="project-description">Flutter-based basketball community app. Features court locator, player check-ins, social engagement, and dedicated newsfeed for basketball players.</p>
 								<button class="read-more-btn" onclick="toggleReadMore(this)">Read More</button>
 							</article>
 							<article class="col-6 col-12-xsmall work-item">
 								<a href="images/7.png" class="image fit thumb"><img src="images/7.png" alt="IoT Dashboard & Analytics" /></a>
 								<h3>Roadeo - Easily book car services near you</h3>
-								<p class="project-description">My client aimed to develop a streamlined mobile app development and web-based platform for booking car services, focusing on accessibility for users and increased visibility for service providers.
-
-Challenges:
-A key challenge was integrating multiple third-party service APIs within FlutterFlow, requiring advanced mobile app customization. Additionally, delivering a consistent and seamless user experience across devices was essential.
-
-Solution:
-I implemented custom API integrations using FlutterFlow and optimized the backend data flow. Leveraging Android Studio for testing and debugging, I ensured cross-platform reliability. I also provided mobile app consultation to guide feature decisions and UX improvements. The final product featured a responsive, intuitive interface and supported both website to mobile app transitions and efficient service scheduling, aligning with best practices in productivity & task management.</p>
+								<p class="project-description">FlutterFlow-based car service booking platform. Features third-party API integrations, cross-platform reliability, and responsive interface for service scheduling.</p>
 								<button class="read-more-btn" onclick="toggleReadMore(this)">Read More</button>
 							</article>
 							<article class="col-6 col-12-xsmall work-item">
@@ -373,12 +407,7 @@ I implemented custom API integrations using FlutterFlow and optimized the backen
 							<article class="col-6 col-12-xsmall work-item">
 								<a href="images/6.png" class="image fit thumb"><img src="images/6.png" alt="n8n Workflow Automation" /></a>
 								<h3>Kids Task Manager</h3>
-								<p class="project-description">Kids Task Manager is a comprehensive productivity & task management mobile application designed to assist parents in organizing and overseeing their children's daily activities. Developed using Android Studio, this app enables parents to create, categorize, and manage tasks for each child, integrating seamlessly with calendars to schedule tasks, set reminders, and monitor completion—all within a single platform.
-
-The application emphasizes routine-building and responsibility, offering a user-friendly interface that makes task management engaging for children. Its design caters to the needs of busy families, ensuring that managing children's tasks is both efficient and effective.
-
-Beyond its core functionalities, Kids Task Manager offers services such as mobile app customization, mobile app bug fixes, and mobile app consultation, ensuring the app remains adaptable and responsive to user feedback. Additionally, for those looking to transition their existing platforms, the app supports website to mobile app transformations, facilitating a broader reach and enhanced user engagement.
-</p>
+								<p class="project-description">Android Studio-based task management app for parents to organize children's daily activities. Features task creation, calendar integration, reminders, and engaging interface for routine-building.</p>
 								<button class="read-more-btn" onclick="toggleReadMore(this)">Read More</button>
 							</article>
 							<article class="col-6 col-12-xsmall work-item">
@@ -424,76 +453,55 @@ Beyond its core functionalities, Kids Task Manager offers services such as mobil
 							<article class="col-6 col-12-xsmall work-item">
 								<a href="images/n8n-Rairflow Survey Agent - Json Output and Email Generation.png" class="image fit thumb"><img src="images/n8n-Rairflow Survey Agent - Json Output and Email Generation.png" alt="n8n Workflow Automation" /></a>
 								<h3>Personalized Sleep Survey Email Generator with Airtable & AI Automation</h3>
-								<p class="project-description">This automation starts with a trigger capturing new sleep survey data. It calculates the current Sleep Score and retrieves the average scores of past users with the same gender and occupation from Airtable. These insights—along with full survey responses—are passed to an AI Agent, which generates a personalized email report. The system ensures each user receives tailored feedback based on both personal and peer group sleep performance.</p>
+								<p class="project-description">n8n automation capturing sleep survey data, calculating scores, and generating personalized AI email reports using Airtable integration and peer group comparisons.</p>
 								<button class="read-more-btn" onclick="toggleReadMore(this)">Read More</button>
 							</article>
 							<article class="col-6 col-12-xsmall work-item">
 								<a href="images/n8n-sharepoint-document-management.png" class="image fit thumb"><img src="images/n8n-sharepoint-document-management.png" alt="n8n Workflow Automation" /></a>
 								<h3>Automated Content Generation & SharePoint Document Management Workflow</h3>
-								<p class="project-description">Developed an intelligent n8n workflow that automatically generates industry-specific research content using AI and organizes it in SharePoint. The system runs monthly, creates professional Word documents from AI-generated content, and uploads them to structured SharePoint folders.
-									Key Features:
-									AI-powered content generation with OpenAI GPT-4
-									Automated SharePoint integration via Microsoft Graph API
-									Batch processing of multiple topics
-									Web research integration for current insights
-									Professional document formatting
-									Perfect for businesses needing automated content creation and document management.</p>
+								<p class="project-description">Intelligent n8n workflow generating AI research content and organizing it in SharePoint. Features OpenAI GPT-4 integration, automated document creation, and Microsoft Graph API.</p>
 								<button class="read-more-btn" onclick="toggleReadMore(this)">Read More</button>
 							</article>
 							<article class="col-6 col-12-xsmall work-item">
 								<a href="images/n8n-expert-dataanlyst-aiagent.png" class="image fit thumb"><img src="images/n8n-expert-dataanlyst-aiagent.png" alt="AI Customer Support Bot" /></a>
 								<h3>Expert Data analyst Ai Agent for Call Center transcription records</h3>
-								<p class="project-description">Meet your AI Data Analyst Agent for call center transcription records, powered by n8n! This expert workflow integrates seamlessly with your Supabase relational database, analyzing chat queries to craft precise SQL queries. It retrieves and analyzes relevant data, delivering accurate, actionable insights effortlessly. Ideal for optimizing customer support and driving data-driven decisions, this AI agent ensures efficiency, precision, and expertise in every interaction.</p>
+								<p class="project-description">AI Data Analyst Agent for call center transcription records using n8n and Supabase. Analyzes queries, crafts SQL, and delivers actionable insights for customer support optimization.</p>
 								<button class="read-more-btn" onclick="toggleReadMore(this)">Read More</button>
 							</article>
 							<article class="col-6 col-12-xsmall work-item">
 								<a href="images/n8n-business-email-auto-reply.png" class="image fit thumb"><img src="images/n8n-business-email-auto-reply.png" alt="AI Customer Support Bot" /></a>
 								<h3>Business Emails Auto Reply Draft Generator Based upon History</h3>
-								<p class="project-description">This project is a Business Emails Auto-Reply Draft Generator built on n8n with a custom automation flow. By analyzing historical email interactions, it automatically generates contextually relevant, professional draft replies, saving time and ensuring consistency. Ideal for busy professionals, this solution streamlines response workflows by delivering ready-to-use drafts based on previous correspondence, enhancing team efficiency and maintaining a cohesive brand voice.</p>
+								<p class="project-description">n8n-powered email auto-reply generator analyzing historical interactions to create contextually relevant, professional draft responses for enhanced team efficiency.</p>
 								<button class="read-more-btn" onclick="toggleReadMore(this)">Read More</button>
 							</article>
 							<article class="col-6 col-12-xsmall work-item">
 								<a href="images/n8n-bulk-pdf-proceessing.png" class="image fit thumb"><img src="images/n8n-bulk-pdf-proceessing.png" alt="AI Customer Support Bot" /></a>
 								<h3>Bulk PDF Processing & Vector Database Management System</h3>
-								<p class="project-description">Developed a robust n8n automation that processes bulk PDF uploads to Pinecone vector database with real-time status tracking in Supabase. Handles hundreds of documents efficiently with complete processing visibility and automated error handling.
-									Key Features:
-
-									Bulk PDF vectorization and Pinecone integration
-									Real-time Supabase status tracking
-									Scalable batch processing
-									Automated error recovery
-									Progress monitoring dashboard
-
-									Perfect for large document repositories requiring optimized search and retrieval systems.</p>
+								<p class="project-description">Robust n8n automation processing bulk PDF uploads to Pinecone vector database with real-time Supabase tracking, batch processing, and automated error handling.</p>
 								<button class="read-more-btn" onclick="toggleReadMore(this)">Read More</button>
 							</article>
 							<article class="col-6 col-12-xsmall work-item">
 								<a href="images/n8n-odoodb-read-data.png" class="image fit thumb"><img src="images/n8n-odoodb-read-data.png" alt="AI Customer Support Bot" /></a>
 								<h3>Odoo db Read data, Price calculations, Export csv and upload</h3>
-								<p class="project-description">This n8n workflow automates stock reporting by connecting to an Odoo database, calculating stock quantities, and distributing a CSV report.
-									Data Fetching: Retrieves product data, including SKUs and quantities, from Odoo.
-									Stock Calculation: Calculates real-time stock levels for each product.
-									CSV Generation: Exports the data into a formatted CSV file.
-									Email Distribution: Sends the CSV file to stakeholders via an SMTP server.
-									This automated flow ensures accurate, timely stock updates without manual effort, ideal for streamlined inventory management.</p>
+								<p class="project-description">n8n workflow automating Odoo stock reporting with data fetching, stock calculations, CSV generation, and email distribution for streamlined inventory management.</p>
 								<button class="read-more-btn" onclick="toggleReadMore(this)">Read More</button>
 							</article>
 							<article class="col-6 col-12-xsmall work-item">
 								<a href="images/n8n-scientific-youtube-video.png" class="image fit thumb"><img src="images/n8n-scientific-youtube-video.png" alt="AI Customer Support Bot" /></a>
 								<h3>n8n Automation - Scientific youtube video script generator</h3>
-								<p class="project-description">TThis project focused on creating scientific YouTube video scripts using a Pinecone vector database and Claude 3 AI. User inputs were collected through a Flutterflow app, and the workflow generated key points, searched the vector database for relevant content, and created detailed, narrator-ready scripts in both English and Chinese. The use of advanced LLMs and custom memory ensured high-quality, multilingual content tailored for seamless video production.</p>
+								<p class="project-description">Scientific YouTube script generator using Pinecone vector database and Claude 3 AI. Creates multilingual, narrator-ready scripts via Flutterflow app integration.</p>
 								<button class="read-more-btn" onclick="toggleReadMore(this)">Read More</button>
 							</article>
 							<article class="col-6 col-12-xsmall work-item">
 								<a href="images/n8n-scientific-youtube-video.png" class="image fit thumb"><img src="images/n8n-scientific-youtube-video.png" alt="AI Customer Support Bot" /></a>
 								<h3>n8n Automation - Scientific youtube video script generator</h3>
-								<p class="project-description">This project focused on creating scientific YouTube video scripts using a Pinecone vector database and Claude 3 AI. User inputs were collected through a Flutterflow app, and the workflow generated key points, searched the vector database for relevant content, and created detailed, narrator-ready scripts in both English and Chinese. The use of advanced LLMs and custom memory ensured high-quality, multilingual content tailored for seamless video production.</p>
+								<p class="project-description">Scientific YouTube script generator using Pinecone vector database and Claude 3 AI. Creates multilingual, narrator-ready scripts via Flutterflow app integration.</p>
 								<button class="read-more-btn" onclick="toggleReadMore(this)">Read More</button>
 							</article>
 							<article class="col-6 col-12-xsmall work-item">
 								<a href="images/n8n-salesforce-account-creation-sharepoint-content-generation.png" class="image fit thumb"><img src="images/n8n-salesforce-account-creation-sharepoint-content-generation.png" alt="AI Customer Support Bot" /></a>
 								<h3>Salesforce to SharePoint Automation with AI Document Generation</h3>
-								<p class="project-description">This workflow automates the creation of client folders in SharePoint when a new account is added in Salesforce. It retrieves account details, generates a personalized company profile using AI, and creates a .docx document. The system checks for existing folders, uploads the generated file, and copies relevant industry templates to the client’s directory—all using Microsoft Graph API and LangChain integration. This streamlines onboarding and documentation with minimal manual effort.</p>
+								<p class="project-description">Salesforce-SharePoint automation creating client folders, generating AI company profiles, and uploading documents using Microsoft Graph API and LangChain integration.</p>
 								<button class="read-more-btn" onclick="toggleReadMore(this)">Read More</button>
 							</article>
 						</div>
